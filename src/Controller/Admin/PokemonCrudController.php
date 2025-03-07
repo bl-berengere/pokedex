@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Pokemon;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
@@ -23,18 +24,33 @@ class PokemonCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
+            IntegerField::new('numero'),
             TextField::new('name'),
             TextField::new('image'),
-            IntegerField::new('numero'),
-            TextEditorField::new('description'),
-            NumberField::new('size')->setLabel('Taille (en m)'),
-            NumberField::new('weight'),
-            AssociationField::new('region'),
-            AssociationField::new('category'),
-            AssociationField::new('types'),
-            AssociationField::new('weaknesses'),
-            AssociationField::new('talents'),
-            AssociationField::new('genders'),
+            TextEditorField::new('description')->hideOnIndex(),
+            NumberField::new('size')->setLabel('Taille (en m)')->hideOnIndex(),
+            NumberField::new('weight')->hideOnIndex(),
+            AssociationField::new('region')->hideOnIndex(),
+            AssociationField::new('category')->hideOnIndex(),
+            AssociationField::new('types')->hideOnIndex(),
+            AssociationField::new('weaknesses')->hideOnIndex(),
+            AssociationField::new('talents')->hideOnIndex(),
+            AssociationField::new('genders')->hideOnIndex(),
         ];
+    }
+
+    public function configureFilters(Filters $filters): Filters
+    {
+        return $filters
+            ->add('numero')
+            ->add('size')
+            ->add('weight')
+            ->add('region')
+            ->add('category')
+            ->add('types')
+            ->add('weaknesses')
+            ->add('talents')
+            ->add('genders')
+        ;
     }
 }
