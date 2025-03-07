@@ -2,6 +2,12 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Category;
+use App\Entity\Gender;
+use App\Entity\Pokemon;
+use App\Entity\Region;
+use App\Entity\Talent;
+use App\Entity\Type;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -25,6 +31,11 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
+        yield MenuItem::linkToCrud('Pokemons', 'fas fa-dragon', Pokemon::class);
+        yield MenuItem::linkToCrud('Catégories', 'fas fa-list', Category::class);
+        yield MenuItem::linkToCrud('Sexes', 'fas fa-venus-mars', Gender::class);
+        yield MenuItem::linkToCrud('Talents', 'fas fa-book', Talent::class);
+        yield MenuItem::linkToCrud('Régions', 'fas fa-map-location-dot', Region::class);
+        yield MenuItem::linkToCrud('Types', 'fas fa-fire', Type::class);
     }
 }
