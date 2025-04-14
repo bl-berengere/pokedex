@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<div class="container">
+    {% for pokemon in pokemons %}
+        <div class="card mb-3 custom card">
+            <img src="{{ asset('public/images/' ~pokemon.image) }}" alt="{{ pokemon.name }}" width="100">
+            <div class="num">n°{{ pokemon.numero }}</div>
+            <h4 class="card-title">{{ pokemon.name }}</h4>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
