@@ -1,15 +1,38 @@
 {% extends 'base.html.twig' %}
 
+{% block javascripts %}
+    <script src="{{ asset('js/search.js') }}"></script>
+{% endblock %}
 
 {% block body %}
 <div class="container">
     {% for pokemon in pokemons %}
-        <div class="card mb-3 custom card">
-            <img src="{{ asset('public/images/' ~pokemon.image) }}" alt="{{ pokemon.name }}" width="100">
-            <div class="num">n°{{ pokemon.numero }}</div>
-            <h4 class="card-title">{{ pokemon.name }}</h4>
-        </div>
+        <a href="{{ path('pokemon_show', { id: pokemon.id }) }}">
+            <div class="pokecard">
+                <img src="{{ asset('/images/pokemon/' ~pokemon.image) }}" alt="{{ pokemon.name }}" width="150">
+                <div class="num">N°{{ '%04d'|format(pokemon.numero) }}</div>
+                <h4 class="card-title">{{ pokemon.name }}</h4>
+                <div class="types">
+                    {% for type in pokemon.types %}
+                        <span class="type" style="color:{{ type.color }}; background-color: {{ type.backgroundColor }};">
+                            {{ type.name }}
+                        </span>
+                    {% endfor %}
+                </div>
+            </div>
+        </a>
+
     {% endfor %}
 </div>
 
 {% endblock %}
+
+{% block header %}
+
+    {{ parent() }}
+
+        <input class="form-control" id="search" type="text" placeholder="Recherche un Pokémon">
+
+{% endblock %}
+
+

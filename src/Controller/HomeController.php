@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Pokemon;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -17,6 +18,14 @@ final class HomeController extends AbstractController
 
         return $this->render('home/index.html.twig', [
             'pokemons' => $pokemons,
+        ]);
+    }
+
+    #[Route('/pokemon/{id}', name: 'pokemon_show')]
+    public function show(Pokemon $pokemon): Response
+    {
+        return $this->render('pokemon/show.html.twig', [
+            'pokemon' => $pokemon,
         ]);
     }
 }

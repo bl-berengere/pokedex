@@ -67,7 +67,7 @@ class Pokemon
     #[ORM\JoinTable(name: 'pokemon_weakness')]
     private Collection $weaknesses;
 
-    public function __construct()
+        public function __construct()
     {
         $this->talents = new ArrayCollection();
         $this->types = new ArrayCollection();
@@ -271,4 +271,5 @@ class Pokemon
 
         return $this;
     }
+
 }

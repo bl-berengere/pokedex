@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="pokecontainer">
+    <div class="poketitle">
+        <div class="card-title">{{ pokemon.name }}</div>
+        <!--%d nbre entier, 04 (4 chiffres avec 0 à gauche-->
+        <div class="num">N° {{ '%04d'|format(pokemon.numero) }}</div>
+    </div>
+
+    <div class="pokeinfo">
+        <img src="{{ asset('/images/pokemon/' ~pokemon.image) }}" alt="{{ pokemon.name }}" width="200">
+
+        <div class="pokeDescription">{{ pokemon.description}}</div>
+    </div>
+
+    <div class="pokeDetails">
+        <div class="pokecardInfo">
+            <ul class="infoList">
+                <li>
+                    <span class="label">Taille</span>
+                    <span class="value">{{ pokemon.size }} m</span>
+                </li>
+                <li>
+                    <span class="label">Poids</span>
+                    <span class="value">{{ pokemon.weight }} kg</span>
+                </li>
+                <li>
+                    <span class="label">Catégorie</span>
+                    <span class="value">{{ pokemon.category.name }}</span>
+                </li>
+
+                {% for talent in pokemon.talents %}
+                    <li><span class="label">Talent</span><span class="value">{{ talent.name }}</span></li>
+                {% endfor %}
+
+                <li>
+                    <span class="label">Sexe</span>
+                    {% for gender in pokemon.genders %}
+                        <span class="genderValue">{{ gender.name }}</span>
+                    {% endfor %}
+                </li>
+            </ul>
+        </div>
+
+        <div class="typesPokemon">
+            <p>Type(s)</p>
+            {% for type in pokemon.types %}
+                <span class="type" style="color:{{ type.color }}; background-color: {{ type.backgroundColor }};">
+                {{ type.name }}
+            </span>
+            {% endfor %}
+        </div>
+
+        <div class="weakness">
+            <p>Faiblesse(s)</p>
+            {% for weakness in pokemon.weaknesses %}
+                <span class="type" style="color:{{ weakness.color }}; background-color: {{ weakness.backgroundColor }};">
+                            {{ weakness.name }}
+                        </span>
+            {% endfor %}
+        </div>
+    </div>
+
+
+</div>
+
+{% endblock %}
