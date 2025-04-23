@@ -21,11 +21,4 @@ final class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/pokemon/{id}', name: 'pokemon_show')]
-    public function show(Pokemon $pokemon): Response
-    {
-        return $this->render('pokemon/show.html.twig', [
-            'pokemon' => $pokemon,
-        ]);
-    }
 }

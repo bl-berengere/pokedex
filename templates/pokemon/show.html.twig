@@ -2,10 +2,24 @@
 
 {% block body %}
 <div class="pokecontainer">
-    <div class="poketitle">
-        <div class="card-title">{{ pokemon.name }}</div>
-        <!--%d nbre entier, 04 (4 chiffres avec 0 à gauche-->
-        <div class="num">N° {{ '%04d'|format(pokemon.numero) }}</div>
+    <div class="banner">
+
+        {% if prevPokemon %}
+            <a class="nav-arrow left" href="{{ path('pokemon_show', { id: prevPokemon.id }) }}">
+                &lt; N°{{ '%04d'|format(prevPokemon.numero) }} {{ prevPokemon.name }}
+            </a>
+        {% endif %}
+
+        <div class="poketitle">
+            <div class="card-title">{{ pokemon.name }}</div>
+            <div class="num">N° {{ '%04d'|format(pokemon.numero) }}</div>
+        </div>
+
+        {% if nextPokemon %}
+            <a class="nav-arrow right" href="{{ path('pokemon_show', { id: nextPokemon.id }) }}">
+                {{ nextPokemon.name }} N°{{ '%04d'|format(nextPokemon.numero) }} &gt;
+            </a>
+        {% endif %}
     </div>
 
     <div class="pokeinfo">
@@ -30,16 +44,25 @@
                     <span class="value">{{ pokemon.category.name }}</span>
                 </li>
 
-                {% for talent in pokemon.talents %}
-                    <li><span class="label">Talent</span><span class="value">{{ talent.name }}</span></li>
-                {% endfor %}
+                <li>
+                    <span class="label">Talent</span>
+                    <span class="value talents">
+                        {% for talent in pokemon.talents %}
+                            <span>{{ talent.name }}</span>
+                        {% endfor %}
+                    </span>
+                </li>
+
 
                 <li>
                     <span class="label">Sexe</span>
-                    {% for gender in pokemon.genders %}
-                        <span class="genderValue">{{ gender.name }}</span>
-                    {% endfor %}
+                    <span class="value genders">
+                        {% for gender in pokemon.genders %}
+                            <span>{{ gender.name }}</span>
+                        {% endfor %}
+                    </span>
                 </li>
+
             </ul>
         </div>
 
@@ -61,6 +84,32 @@
             {% endfor %}
         </div>
     </div>
+
+    <div class="evolution">
+        <h4>Évolutions</h4>
+        {% if evolutionLine|length > 1 %}
+            <div class="evolution-chain">
+                {% for evo in evolutionLine %}
+                    <div class="evolution-stage">
+                        <a href="{{ path('pokemon_show', { id: evo.id }) }}">
+                            <img src="{{ asset('/images/pokemon/' ~ evo.image) }}" alt="{{ evo.name }}">
+                            <p>{{ evo.name }}<br>N°{{ '%04d'|format(evo.numero) }}</p>
+                        </a>
+                    </div>
+                    {% if not loop.last %}
+                        <div class="evo-arrow">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="no-evolution">Ce Pokémon n’a pas d’évolution.</p>
+        {% endif %}
+    </div>
+
+
+</div>
 
 
 </div>

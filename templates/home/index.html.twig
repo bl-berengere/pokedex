@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-<div class="container">
+<div class="containerPokemons">
     {% for pokemon in pokemons %}
         <a href="{{ path('pokemon_show', { id: pokemon.id }) }}">
             <div class="pokecard">

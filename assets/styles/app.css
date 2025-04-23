@@ -5,15 +5,15 @@ body {
     background-color: #E0E0E0;
     margin: 0;
 }
-.wrapper {
+.wrapper { /* Corps de la page */
     background-color: #DEF0FF;
     max-width: 1200px;
-    margin: 0 70px;
-    padding: 30px;
+    margin: 0 auto;
+    padding: 30px 20px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
-.container{
+.containerPokemons{ /* Grille des pokémons */
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 30px;
@@ -22,27 +22,27 @@ body {
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
-.container a{
+.containerPokemons a{
     text-decoration: none;
     color: #2D3D5C;
 }
-.container .pokecard{
+.containerPokemons .pokecard{ /* Bloc d'un pokémon */
     padding: 10px;
     text-align: center;
 
 }
-.container .pokecard img {
+.containerPokemons .pokecard img {
     max-width: 100%;
     height: auto;
     transition: transform 0.2s ease-in-out;
 }
-.container .pokecard img:hover{
+.containerPokemons .pokecard img:hover{
     transform: scale(1.08);
 }
-.container .card-title{
+.containerPokemons .card-title{
     text-align: right;
 }
-.container .pokecard .num{
+.containerPokemons .pokecard .num{
     text-align: right;
     font-size: 0.7rem;
     color: gray;
@@ -54,8 +54,31 @@ body {
 }
 
 .type {
-    padding: 4px;
-    border-radius: 10px;
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    margin: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+/***Partie responsive***/
+@media (max-width: 768px) {
+    .wrapper {
+        padding: 20px 10px;
+    }
+
+    .containerPokemons {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .containerPokemons {
+        grid-template-columns: 1fr;
+    }
 }
 
 /***Show Pokemon***/
@@ -63,7 +86,7 @@ body {
     display: flex;
     flex-direction: column;
     margin: auto;
-    padding: 30px;
+    padding: 40px;
     background-color: #f8f8f8;
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
@@ -86,51 +109,120 @@ body {
 .pokeinfo{
     display: grid;
     grid-template-columns: repeat(2, auto);
+    margin-top: 40px;
+
 }
 .pokeinfo img{
     margin-bottom: 3rem;
 }
 .pokeinfo .pokeDescription{
-    width: 50%;
+    width: 70%;
     align-content: center;
     margin-left: 8rem;
 }
 .pokecardInfo{
     background-color: #2D3D5C;
     color: #f8f8f8;
-    border-radius: 10px;
+    border-radius: 16px;
+    padding: 24px 32px;
     width: fit-content;
-    padding: 20px;
+    min-width: 260px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
 }
 .pokeDetails{
     display: flex;
     flex-wrap: wrap;
-    gap: 40px;
-
+    gap: 30px;
+    justify-content: flex-start;
+}
+.pokeDetails > div {
+    flex: 1 1 250px;
+    min-width: 240px;
 }
 .pokecardInfo .infoList{
     list-style: none;
     display: grid;
-    grid-template-columns: repeat(2, auto);
-    gap: 10px 30px;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 40px;
+    padding: 0;
+    margin: 0;
 }
 .pokecardInfo .infoList .label {
     display: block;
     font-weight: bold;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: #DEF0FF;
+
 }
 .pokecardInfo .infoList .value {
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+.value.talents span,
+.value.genders span {
     display: block;
-    font-size: 1.1rem;
+    margin-top: 2px;
+}
+.typesPokemon{
+    margin-left: 40px;
 }
 p{
     font-weight: bold;
     font-size: 0.9rem;
 }
-/**.pokecardInfo,
-.typesPokemon,
-.weakness {
-    flex: 1 1 30%;
-    min-width: 200px;
-}**/
+/* Bloc évolution */
+.evolution{
+    background-color: #DEF0FF;
+    border-radius: 16px;
+    padding: 24px 32px;
+    margin-top: 40px;
+}
+.evolution h4{
+    color: #2D3D5C;
+}
+.evolution a{
+    text-decoration: none;
+    color: #2D3D5C;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.evolution-chain {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.evolution-stage {
+    text-align: center;
+}
+
+.evolution-stage img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: white;
+    padding: 6px;
+}
+
+.evo-arrow {
+    font-size: 2rem;
+    color: #2D3D5C;
+}
+
+.types {
+    margin-top: 6px;
+}
+.types .type {
+    display: inline-block;
+    margin: 2px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: white;
+}
+

@@ -67,12 +67,20 @@ class Pokemon
     #[ORM\JoinTable(name: 'pokemon_weakness')]
     private Collection $weaknesses;
 
-        public function __construct()
+    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'evolutions')]
+    private ?Pokemon $evolutionPrecedente = null;
+
+    #[ORM\OneToMany(mappedBy: 'evolutionPrecedente', targetEntity: self::class)]
+    private Collection $evolutions;
+
+
+    public function __construct()
     {
         $this->talents = new ArrayCollection();
         $this->types = new ArrayCollection();
         $this->genders = new ArrayCollection();
         $this->weaknesses = new ArrayCollection();
+        $this->evolutions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -272,4 +280,43 @@ class Pokemon
         return $this;
     }
 
+    public function getEvolutionPrecedente(): ?self
+    {
+        return $this->evolutionPrecedente;
+    }
+
+    public function setEvolutionPrecedente(?self $pokemon): static
+    {
+        $this->evolutionPrecedente = $pokemon;
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Pokemon>
+     */
+    public function getEvolutions(): Collection
+    {
+        return $this->evolutions;
+    }
+
+
+    public function getFullEvolutionLine(): array
+    {
+        $line = [];
+
+        $current = $this;
+        while ($current->getEvolutionPrecedente()) {
+            $current = $current->getEvolutionPrecedente();
+        }
+
+        $line[] = $current;
+        while (!$current->getEvolutions()->isEmpty()) {
+            $current = $current->getEvolutions()->first();
+            $line[] = $current;
+        }
+
+        return $line;
+    }
 }
+
+
