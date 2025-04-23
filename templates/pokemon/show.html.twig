@@ -2,11 +2,11 @@
 
 {% block body %}
 <div class="pokecontainer">
-    <div class="banner">
 
+    <div class="banner">
         {% if prevPokemon %}
             <a class="nav-arrow left" href="{{ path('pokemon_show', { id: prevPokemon.id }) }}">
-                &lt; N°{{ '%04d'|format(prevPokemon.numero) }} {{ prevPokemon.name }}
+                &lt; {{ prevPokemon.name }} N°{{ '%04d'|format(prevPokemon.numero) }}
             </a>
         {% endif %}
 
@@ -90,7 +90,7 @@
         {% if evolutionLine|length > 1 %}
             <div class="evolution-chain">
                 {% for evo in evolutionLine %}
-                    <div class="evolution-stage">
+                    <div class="evolution-stage {% if evo.id == pokemon.id %}active{% endif %}">
                         <a href="{{ path('pokemon_show', { id: evo.id }) }}">
                             <img src="{{ asset('/images/pokemon/' ~ evo.image) }}" alt="{{ evo.name }}">
                             <p>{{ evo.name }}<br>N°{{ '%04d'|format(evo.numero) }}</p>
