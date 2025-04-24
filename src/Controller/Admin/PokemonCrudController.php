@@ -31,6 +31,7 @@ class PokemonCrudController extends AbstractCrudController
             TextareaField::new('description')->hideOnIndex(),
             NumberField::new('size')->setLabel('Taille (en m)')->hideOnIndex(),
             NumberField::new('weight')->hideOnIndex(),
+            AssociationField::new('evolutionPrecedente')->hideOnIndex(),
             AssociationField::new('region')->hideOnIndex(),
             AssociationField::new('category')->hideOnIndex(),
             AssociationField::new('types')->hideOnIndex(),
@@ -54,4 +55,5 @@ class PokemonCrudController extends AbstractCrudController
             ->add('genders')
         ;
     }
+
 }

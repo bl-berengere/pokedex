@@ -317,6 +317,13 @@ class Pokemon
 
         return $line;
     }
+    public function __toString(): string
+    {
+        return $this->name ?? 'Pokémon';
+    }
 }
+
+
+
 
 

@@ -6,7 +6,8 @@
     <div class="banner">
         {% if prevPokemon %}
             <a class="nav-arrow left" href="{{ path('pokemon_show', { id: prevPokemon.id }) }}">
-                &lt; {{ prevPokemon.name }} N°{{ '%04d'|format(prevPokemon.numero) }}
+                <i class="fa-solid fa-angle-left"></i>
+                {{ prevPokemon.name }} N°{{ '%04d'|format(prevPokemon.numero) }}
             </a>
         {% endif %}
 
@@ -17,7 +18,8 @@
 
         {% if nextPokemon %}
             <a class="nav-arrow right" href="{{ path('pokemon_show', { id: nextPokemon.id }) }}">
-                {{ nextPokemon.name }} N°{{ '%04d'|format(nextPokemon.numero) }} &gt;
+                {{ nextPokemon.name }} N°{{ '%04d'|format(nextPokemon.numero) }}
+                <i class="fa-solid fa-angle-right"></i>
             </a>
         {% endif %}
     </div>
