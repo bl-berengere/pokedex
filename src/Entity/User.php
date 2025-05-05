@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -32,6 +34,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+
+    /**
+     * @var Collection<int, Pokemon>
+     */
+    #[ORM\ManyToMany(targetEntity: Pokemon::class, inversedBy: 'favoriteOf')]
+    private Collection $favorite;
+
+    public function __construct()
+    {
+        $this->favorite = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -111,5 +124,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function hasRole(string $role): bool
     {
         return in_array($role, $this->roles);
+    }
+
+    /**
+     * @return Collection<int, Pokemon>
+     */
+    public function getFavorite(): Collection
+    {
+        return $this->favorite;
+    }
+
+    public function addFavorite(Pokemon $favorite): static
+    {
+        if (!$this->favorite->contains($favorite)) {
+            $this->favorite->add($favorite);
+        }
+
+        return $this;
+    }
+
+    public function removeFavorite(Pokemon $favorite): static
+    {
+        $this->favorite->removeElement($favorite);
+
+        return $this;
     }
 }

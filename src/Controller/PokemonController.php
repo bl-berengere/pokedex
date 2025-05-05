@@ -25,7 +25,7 @@ final class PokemonController extends AbstractController
         'nextPokemon' => $pokemonRepository->findOneBy(['numero' => $pokemon->getNumero() + 1]),
         'previousEvolution' => $pokemon->getEvolutionPrecedente(),
         'nextEvolutions' => $pokemon->getEvolutions(),
-        'evolutionLine' => $pokemon->getFullEvolutionLine()
+        'evolutionLine' => $pokemon->getFullEvolutionLine(),
 
     ]);
 

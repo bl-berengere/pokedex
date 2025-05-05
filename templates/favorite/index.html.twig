@@ -8,7 +8,7 @@
 {% block body %}
     <div class="containerPokemons">
         {% for pokemon in pokemons %}
-            <div class="pokecard">
+            <div class="pokecard" data-id="{{ pokemon.id }}">
                 {% if app.user %}
                     <div class="fav" data-id="{{ pokemon.id }}" onclick="toggleFavorite(this)">
                         <i class="fa-heart {{ pokemon.id in favoritePokemonIds ? 'fa-solid' : 'fa-regular' }}" style="color: #2d3d5c;"></i>
@@ -22,8 +22,8 @@
                     <div class="types">
                         {% for type in pokemon.types %}
                             <span class="type" style="color:{{ type.color }}; background-color: {{ type.backgroundColor }};">
-                            {{ type.name }}
-                        </span>
+                                {{ type.name }}
+                            </span>
                         {% endfor %}
                     </div>
                 </a>
@@ -31,14 +31,3 @@
         {% endfor %}
     </div>
 {% endblock %}
-
-
-{% block header %}
-
-    {{ parent() }}
-
-        <input class="form-control" id="search" type="text" placeholder="Recherche un Pokémon">
-
-{% endblock %}
-
-

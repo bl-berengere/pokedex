@@ -15,9 +15,18 @@ final class HomeController extends AbstractController
     public function index(PokemonRepository $pokemonRepository): Response
     {
         $pokemons = $pokemonRepository->findAll();
+        $user = $this->getUser();
+
+        $favoritePokemons = [];
+        if ($user){
+            $favoritePokemons = $user->getFavorite()->toArray();
+            $favoritePokemonIds = $user->getFavorite()->map(fn($p) => $p->getId())->toArray();
+        }
 
         return $this->render('home/index.html.twig', [
             'pokemons' => $pokemons,
+            'favoritePokemons' => $favoritePokemons,
+            'favoritePokemonIds' => $favoritePokemonIds
         ]);
     }
 

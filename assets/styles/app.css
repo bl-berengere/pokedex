@@ -26,6 +26,10 @@ body {
     text-decoration: none;
     color: #2D3D5C;
 }
+.containerPokemons .fav { /*Icône Favoris*/
+    display: flex;
+    justify-content: flex-end;
+}
 .containerPokemons .pokecard{ /* Bloc d'un pokémon */
     padding: 10px;
     text-align: center;

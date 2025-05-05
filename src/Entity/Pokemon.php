@@ -73,6 +73,12 @@ class Pokemon
     #[ORM\OneToMany(mappedBy: 'evolutionPrecedente', targetEntity: self::class)]
     private Collection $evolutions;
 
+    /**
+     * @var Collection<int, User>
+     */
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'favorite')]
+    private Collection $favoriteOf;
+
 
     public function __construct()
     {
@@ -81,6 +87,7 @@ class Pokemon
         $this->genders = new ArrayCollection();
         $this->weaknesses = new ArrayCollection();
         $this->evolutions = new ArrayCollection();
+        $this->favoriteOf = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -320,6 +327,33 @@ class Pokemon
     public function __toString(): string
     {
         return $this->name ?? 'Pokémon';
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getFavoriteOf(): Collection
+    {
+        return $this->favoriteOf;
+    }
+
+    public function addFavoriteOf(User $favoriteOf): static
+    {
+        if (!$this->favoriteOf->contains($favoriteOf)) {
+            $this->favoriteOf->add($favoriteOf);
+            $favoriteOf->addFavorite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavoriteOf(User $favoriteOf): static
+    {
+        if ($this->favoriteOf->removeElement($favoriteOf)) {
+            $favoriteOf->removeFavorite($this);
+        }
+
+        return $this;
     }
 }
 
