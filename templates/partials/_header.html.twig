@@ -2,3 +2,14 @@
     <i class="fa-solid fa-dragon"></i>
     <a href="{{ path('app_home') }}">Pokédex</a>
 </div>
+<div class="links">
+    {% if not app.user %}
+        <a href="{{ path('app_login') }}">Connexion</a>
+    {% else %}
+        <a href="">Mes favoris</a>
+        <a href="{{ path('app_logout') }}">Déconnexion</a>
+    {% endif %}
+    {% if app.user and app.user.hasRole('ROLE_ADMIN') %}
+        <a href="{{ path('admin') }}">Admin</a>
+    {% endif %}
+</div>
