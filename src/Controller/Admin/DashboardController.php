@@ -8,6 +8,7 @@ use App\Entity\Pokemon;
 use App\Entity\Region;
 use App\Entity\Talent;
 use App\Entity\Type;
+use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -37,5 +38,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Talents', 'fas fa-book', Talent::class);
         yield MenuItem::linkToCrud('Régions', 'fas fa-map-location-dot', Region::class);
         yield MenuItem::linkToCrud('Types', 'fas fa-fire', Type::class);
+        yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-user', User::class);
     }
 }
