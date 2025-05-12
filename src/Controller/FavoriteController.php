@@ -7,7 +7,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
 
 final class FavoriteController extends AbstractController
 {
@@ -16,17 +15,16 @@ final class FavoriteController extends AbstractController
     {
         $user = $this->getUser();
 
-        if (!$user){
-            return $this->redirectToRoute('app_login');
+        $favoritePokemons = [];
+
+        if ($user){
+            $favoritePokemons = $user->getFavorite();
         }
 
-        $pokemons = $user->getFavorite()->toArray();
-        $favoritePokemonIds = $user->getFavorite()->map(fn($p) => $p->getId())->toArray();
-
         return $this->render('favorite/index.html.twig', [
-            'pokemons' => $pokemons,
-            'favoritePokemonIds' => $favoritePokemonIds,
+            'favoritePokemons' => $favoritePokemons,
         ]);
+
     }
 
     #[Route('/favorite/add/{id}', name: 'app_favorite_add', methods: ['POST'])]

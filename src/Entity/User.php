@@ -39,11 +39,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var Collection<int, Pokemon>
      */
     #[ORM\ManyToMany(targetEntity: Pokemon::class, inversedBy: 'favoriteOf')]
-    private Collection $favorite;
+    private Collection $favorites;
 
     public function __construct()
     {
-        $this->favorite = new ArrayCollection();
+        $this->favorites = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -131,13 +131,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getFavorite(): Collection
     {
-        return $this->favorite;
+        return $this->favorites;
     }
 
     public function addFavorite(Pokemon $favorite): static
     {
-        if (!$this->favorite->contains($favorite)) {
-            $this->favorite->add($favorite);
+        if (!$this->favorites->contains($favorite)) {
+            $this->favorites->add($favorite);
         }
 
         return $this;
@@ -145,7 +145,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function removeFavorite(Pokemon $favorite): static
     {
-        $this->favorite->removeElement($favorite);
+        $this->favorites->removeElement($favorite);
 
         return $this;
     }

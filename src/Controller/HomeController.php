@@ -18,17 +18,14 @@ final class HomeController extends AbstractController
         $user = $this->getUser();
 
         $favoritePokemons = [];
-        $favoritePokemonIds = [];
 
         if ($user){
-            $favoritePokemons = $user->getFavorite()->toArray();
-            $favoritePokemonIds = $user->getFavorite()->map(fn($p) => $p->getId())->toArray();
+            $favoritePokemons = $user->getFavorite();
         }
 
         return $this->render('home/index.html.twig', [
             'pokemons' => $pokemons,
             'favoritePokemons' => $favoritePokemons,
-            'favoritePokemonIds' => $favoritePokemonIds,
         ]);
     }
 

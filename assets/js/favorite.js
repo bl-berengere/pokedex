@@ -1,4 +1,4 @@
-console.log('favorite');
+
 function toggleFavorite(element){
     const pokemonId = element.dataset.id;
     const icon = element.querySelector('i');
@@ -9,7 +9,6 @@ function toggleFavorite(element){
         : `/favorite/add/${pokemonId}`;
 
     fetch(url, {method: 'POST'})
-    .then(response => response.json())
     .then(data => {
         icon.classList.toggle('fa-solid');
         icon.classList.toggle('fa-regular');

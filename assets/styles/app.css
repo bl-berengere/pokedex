@@ -29,6 +29,11 @@ body {
 .containerPokemons .fav { /*Icône Favoris*/
     display: flex;
     justify-content: flex-end;
+    color: #2d3d5c;
+}
+
+.containerPokemons .fav i:hover {
+    cursor: pointer;
 }
 .containerPokemons .pokecard{ /* Bloc d'un pokémon */
     padding: 10px;
@@ -85,7 +90,7 @@ body {
     }
 }
 
-/***Show Pokemon***/
+/***PAGE SHOW POKÉMON***/
 .pokecontainer{
     display: flex;
     flex-direction: column;
@@ -122,7 +127,7 @@ body {
 }
 .pokeinfo{
     display: grid;
-    grid-template-columns: repeat(2, auto);
+    grid-template-columns: repeat(3, auto);
     margin-top: 40px;
 
 }

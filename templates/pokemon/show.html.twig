@@ -27,6 +27,12 @@
     <div class="pokeinfo">
         <img src="{{ asset('/images/pokemon/' ~pokemon.image) }}" alt="{{ pokemon.name }}" width="200">
 
+        {% if app.user %}
+            <div class="fav" data-id="{{ pokemon.id }}" onclick="toggleFavorite(this)">
+                <i class="fa-heart {{ pokemon in favoritePokemons ? 'fa-solid' : 'fa-regular' }}"></i>
+            </div>
+        {% endif %}
+
         <div class="pokeDescription">{{ pokemon.description}}</div>
     </div>
 

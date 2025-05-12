@@ -19,6 +19,13 @@ final class PokemonController extends AbstractController
     $prev = $pokemonRepository->findOneBy(['numero' => $numero - 1]);
     $next = $pokemonRepository->findOneBy(['numero' => $numero + 1]);
 
+    $user = $this->getUser();
+    $favoritePokemons = [];
+
+    if ($user) {
+        $favoritePokemons = $user->getFavorite();
+    }
+
     return $this->render('pokemon/show.html.twig', [
         'pokemon' => $pokemon,
         'prevPokemon' => $pokemonRepository->findOneBy(['numero' => $pokemon->getNumero() - 1]),
@@ -26,6 +33,8 @@ final class PokemonController extends AbstractController
         'previousEvolution' => $pokemon->getEvolutionPrecedente(),
         'nextEvolutions' => $pokemon->getEvolutions(),
         'evolutionLine' => $pokemon->getFullEvolutionLine(),
+        'favoritePokemons' => $favoritePokemons,
+
 
     ]);
 

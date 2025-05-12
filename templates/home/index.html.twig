@@ -1,9 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block javascripts %}
-    <script src="{{ asset('js/search.js') }}"></script>
-    <script src="{{ asset('js/favorite.js') }}"></script>
-    <script src="{{ asset('js/home.js') }}"></script>
+{% block header %}
+
+    {{ parent() }}
+
+    <input class="form-control" id="search" type="text" placeholder="Recherche un Pokémon" />
+
 {% endblock %}
 
 {% block body %}
@@ -12,7 +14,7 @@
             <div class="pokecard">
                 {% if app.user %}
                     <div class="fav" data-id="{{ pokemon.id }}" onclick="toggleFavorite(this)">
-                        <i class="fa-heart {{ pokemon.id in favoritePokemonIds ? 'fa-solid' : 'fa-regular' }}" style="color: #2d3d5c;"></i>
+                        <i class="fa-heart {{ pokemon in favoritePokemons ? 'fa-solid' : 'fa-regular' }}"></i>
                     </div>
                 {% endif %}
 
@@ -23,8 +25,8 @@
                     <div class="types">
                         {% for type in pokemon.types %}
                             <span class="type" style="color:{{ type.color }}; background-color: {{ type.backgroundColor }};">
-                            {{ type.name }}
-                        </span>
+                                {{ type.name }}
+                            </span>
                         {% endfor %}
                     </div>
                 </a>
@@ -34,12 +36,6 @@
 {% endblock %}
 
 
-{% block header %}
 
-    {{ parent() }}
-
-        <input class="form-control" id="search" type="text" placeholder="Recherche un Pokémon">
-
-{% endblock %}
 
 

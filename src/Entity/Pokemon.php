@@ -76,7 +76,7 @@ class Pokemon
     /**
      * @var Collection<int, User>
      */
-    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'favorite')]
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'favorites')]
     private Collection $favoriteOf;
 
 

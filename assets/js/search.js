@@ -8,9 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
         pokecards.forEach(card => {
             const cardTitle = card.querySelector('.card-title').textContent.toLowerCase();
             if (cardTitle.includes(searchTerm)) {
-                card.parentElement.style.display = 'block'; // afficher le <a>
+                card.style.display = 'block'; // afficher le <a>
             } else {
-                card.parentElement.style.display = 'none'; // cacher le <a>
+                card.style.display = 'none'; // cacher le <a>
             }
         });
     });
