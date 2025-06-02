@@ -10,6 +10,7 @@
 
 {% block body %}
     <div class="containerPokemons">
+        <div id="no-results" style="display: none;">Pas de pokémons trouvés</div>
         {% for pokemon in pokemons %}
             <div class="pokecard">
                 {% if app.user %}
@@ -20,7 +21,7 @@
 
                 <a href="{{ path('pokemon_show', { id: pokemon.id }) }}">
                     <img src="{{ asset('/images/pokemon/' ~pokemon.image) }}" alt="{{ pokemon.name }}" width="150">
-                    <div class="num">N°{{ '%04d'|format(pokemon.numero) }}</div>
+                    <div class="num">N°{{ '%03d'|format(pokemon.numero) }}</div>
                     <h4 class="card-title">{{ pokemon.name }}</h4>
                     <div class="types">
                         {% for type in pokemon.types %}
@@ -34,8 +35,3 @@
         {% endfor %}
     </div>
 {% endblock %}
-
-
-
-
-
