@@ -276,7 +276,7 @@ p{
     color: white;
 }
 
-/************Partie responsive***********/
+/* ==== Partie responsive ==== */
 @media (max-width: 768px) {
     .wrapper {
         padding: 20px 10px;
@@ -339,7 +339,7 @@ p{
         max-width: 300px;
     }
 
-    .pokeTypesContainer { /***Bloc TYPE & FAIBLESSE***/
+    .pokeTypesContainer { /* === Bloc TYPE & FAIBLESSE === */
         flex-direction: column;
         gap: 10px;
         align-items: start;
