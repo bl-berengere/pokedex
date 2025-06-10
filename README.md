@@ -1,3 +1,4 @@
+Projet réalisé dans le cadre de ma formation DWWM
 Mon Pokédex
 Ce projet Symfony contient un fichier SQL afin d'implémenter les données.
 
